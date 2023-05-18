@@ -1,0 +1,27 @@
+{
+  "name": "express-user-intro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "userData.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victorsworld/Express-user-intro.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/victorsworld/Express-user-intro/issues"
+  },
+  "homepage": "https://github.com/victorsworld/Express-user-intro#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
