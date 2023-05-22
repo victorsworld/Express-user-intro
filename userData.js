@@ -54,3 +54,4 @@ const usersList = [
 		nat: "IE",
 	},
 ];
+module.exports = usersList;
