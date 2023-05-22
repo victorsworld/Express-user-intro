@@ -61,23 +61,35 @@ app.post('/new-user', (req, res) => {
   }
 });
 
-app.get('/update-user/:updateEmail', (req, res) => {
-  const updateEmail = req.params.updateEmail;
-  const findIndex = userList.findIndex(
-    (user) => user.email === updateEmail
-  );
+app.put('/update-user/:userEmail', (req, res) => {
+  const email = req.params.userEmail;
+  const findIndex = userList.findIndex((user) => user.email === email);
 
   if (findIndex === -1) {
-    return res.status(400).json({ success: false, message: 'User not found' });
-  }
+    return res.status(400).json({ success: false, message: 'User not found' });}
+  
   const user = userList[findIndex];
   const updatedUserEmail = { ...user };
+  console.log(updatedUserEmail)
 
   for (let key in req.body) {
-    if (req.body[key]) {
-      updatedUserEmail[key] = req.body[key];
-    }
+	console.log(typeof req.body[key])
+	if(typeof req.body[key] === "object"){
+    updatedUserEmail[key] = {
+		...updatedUserEmail[key],
+		...req.body[key]
+		};
+	}
+	else{
+		updatedUserEmail[key] = req.body[key]
+	}
   }
+  	console.log("after", updatedUserEmail)
+	userList.splice(findIndex, 1, updatedUserEmail)
+	res.status(200).json({ success: true})
+})
+
+
 
   app.delete('/delete-user/:cellNumber', (req, res) => {
     const cellNumber = req.params.cellNumber;
@@ -89,13 +101,13 @@ app.get('/update-user/:updateEmail', (req, res) => {
     } else {
         res.status(404).send({ success: false, message: 'User not found' });
     }
-});
+
 
   userList.splice(findIndex, 1, updatedUserEmail);
 
   console.log(updatedUserEmail);
   res.status(200).json({ message: 'Success' });
-});
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
